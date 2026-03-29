@@ -66,7 +66,7 @@
 
         .nav-socials a:hover { color: var(--accent-color); }
 
-        /* Logo Kaviar (flottant en haut à droite) */
+        /* Logo Kaviar */
         .logo-kaviar {
             position: fixed;
             top: 100px;
@@ -126,7 +126,7 @@
 
         .btn-cv:hover { transform: scale(1.05); }
 
-        /* Cartes de contenu */
+        /* Contenu */
         .content-card {
             background: var(--card-bg);
             padding: 40px;
@@ -144,7 +144,7 @@
             border-left: 4px solid var(--accent-color);
         }
 
-        /* Style des axes stratégiques : GRAS et BLEU */
+        /* Axes stratégiques : GRAS et BLEU */
         .axe-titre {
             display: block;
             font-size: 1.4rem;
@@ -206,7 +206,7 @@
             color: #efefef;
         }
 
-        /* "En savoir plus" et Liens */
+        /* En savoir plus */
         .more-info-title {
             text-align: center;
             font-weight: bold;
@@ -311,7 +311,7 @@
             
             <div class="strat-block">
                 <span class="axe-titre">- Mon réseau proche :</span>
-                Après analyse et découverte de ARAI, je me suis vite rendu compte qu’il pourrait correspondre aux attentes de mon école et qu’il était intéressant pour moi de jouer de mes connections avec l’administration afin de présenter et vendre le produit. Il serait notamment intéressant pour le développement des houses, un projet étudiant novateur commencé cette année à l’école. Celui-ci est en plein développement et ARAI pourrait venir moderniser encore plus ce projet. Son utilisation serait diverse, pour des réponses aux questions, pour accueillir et guider les nombreux étudiants du campus tous à la fois et bien plus. Mes relations avec l’administration de l’école de par mon ancien statut de président du BVE pourrait me permettre d’entamer rapidement des présentations du produit et des propositions de vente.
+                Après analyse et découverte de ARAI, je me suis vite rendu compte qu’il pourrait correspondre aux attentes de mon école et qu’il était intéressant pour moi de jouer de mes connections avec l’administration afin de présenter et vendre le produit. Il serait notamment intéressant pour le développement des houses, un projet étudiant novateur commencé cette année à l’école. Celui-ci est en plein développement et ARAI pourrait venir moderniser encore plus ce projet. Son utlisation serait diverse, pour des réponses aux questions, pour accueillir et guider les nombreux étudiants du campus tous à la fois et bien plus. Mes relations avec l’administration de l’école de par mon ancien statut de président du BVE pourrait me permettre d’entamer rapidement des présentations du produit et des propositions de vente.
                 <br><br>
                 Dans le cadre de mon école, ARAI pourrait également correspondre à la période admissibles durant laquelle j’ai participé l’année dernière, cette période consiste à accueillir sur le campus les candidats pour intégrer l’école l’année suivante. L’utilisation d’ARAI dans un but d’accueil et de donner des directions pourrait donc être intéressant pour l’école. Ayant participé l’année dernière, il sera facile pour moi d’approcher les organisateurs pour en discuter. Ces deux opportunités me mènent à penser qu’il y a possibilité de développer ARAI à Rennes School Of Business et dans les écoles en général, dans Rennes ou à travers la France.
                 
@@ -457,26 +457,25 @@
     <section id="contact">
         <h2>Me contacter</h2>
         <div class="content-card" style="text-align: center;">
-            <p style="font-size: 1.2rem;">📧 <strong>thomas.herberts@rennes-sb.com</strong></p>
-            <p style="font-size: 1.2rem;">📞 <strong>+33 7 62 96 72 07</strong></p>
+            <div style="margin-bottom: 30px;">
+                <p style="font-size: 1.2rem;">📧 <strong>thomas.herberts@rennes-sb.com</strong></p>
+                <p style="font-size: 1.2rem;">📞 <strong>+33 7 62 96 72 07</strong></p>
+            </div>
             <div class="social-grid">
                 <a href="https://www.linkedin.com/in/thomas-herberts-787b8830b/" target="_blank" class="social-button"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
             </div>
-            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 30px 0;">
             <p style="opacity: 0.7;">Rennes / Brest | 2ème année de Bachelor (English Track)</p>
         </div>
     </section>
 
     <script>
         function showSection(id) {
-            // Cacher toutes les sections
             document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            // Afficher la section cible
             const target = document.getElementById(id);
             if (target) {
                 target.classList.add('active');
             }
-            // Remonter en haut de page
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     </script>
