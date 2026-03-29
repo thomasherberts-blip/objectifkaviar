@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas Herberts - Objectif Kaviar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #2e026d 0%, #0f0c29 100%);
+            --accent-color: #00d2ff;
+            --text-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.07);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-color);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover { color: var(--accent-color); }
+
+        .nav-socials a {
+            font-size: 1.2rem;
+            margin-left: 15px;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        /* Logo Kaviar */
+        .logo-kaviar {
+            position: fixed;
+            top: 100px;
+            right: 40px;
+            width: 130px;
+            filter: drop-shadow(0 0 8px var(--accent-color));
+            z-index: 10;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        section.active {
+            display: flex;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Accueil */
+        #accueil { text-align: center; }
+        h1 { font-size: 3.5rem; margin-bottom: 10px; font-weight: 700; letter-spacing: -1px; }
+
+        .image-container {
+            margin: 20px auto;
+            max-width: 300px; 
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.15);
+        }
+
+        .presentation-img { width: 100%; height: auto; display: block; }
+
+        .btn-cv {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 18px 40px;
+            background: var(--accent-color);
+            color: #0f0c29;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-cv:hover { transform: scale(1.05); }
+
+        /* Contenu */
+        .content-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            margin-bottom: 30px;
+        }
+
+        h2 { font-size: 2.5rem; margin-bottom: 30px; color: var(--accent-color); text-align: center; }
+
+        .strat-block {
+            margin-bottom: 40px;
+            padding-left: 25px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .axe-titre {
+            display: block;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Galerie Photos */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover { transform: translateY(-5px); }
+
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 15px;
+            font-size: 0.9rem;
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Schémas */
+        .schema { display: flex; align-items: center; justify-content: center; gap: 15px; margin: 25px 0; flex-wrap: wrap; }
+        .schema-box { background: rgba(0, 210, 255, 0.1); border: 1px solid var(--accent-color); padding: 12px 20px; border-radius: 10px; font-size: 0.85rem; font-weight: bold; text-align: center; min-width: 120px; }
+        .schema-arrow { color: var(--accent-color); font-size: 1.2rem; }
+
+        /* Social */
+        .social-grid { display: flex; justify-content: center; gap: 15px; margin-top: 25px; flex-wrap: wrap; }
+        .social-button { display: flex; align-items: center; gap: 10px; padding: 10px 20px; background: rgba(255,255,255,0.1); border-radius: 12px; color: white; text-decoration: none; font-size: 0.9rem; transition: all 0.3s; border: 1px solid rgba(255,255,255,0.1); }
+        .social-button:hover { background: var(--accent-color); color: #0f0c29; }
+
+        .section-logo-header { display: block; margin: 0 auto 30px auto; max-width: 120px; height: auto; filter: drop-shadow(0 0 5px rgba(255,255,255,0.3)); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            nav { flex-direction: column; padding: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .logo-kaviar { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a onclick="showSection('accueil')">Accueil</a>
+            <a onclick="showSection('pourquoi')">Pourquoi moi ?</a>
+            <a onclick="showSection('arai')">Stratégie ARAI</a>
+            <a onclick="showSection('poesiar')">Stratégie PoesiAR</a>
+            <a onclick="showSection('photos')">Photos</a>
+            <a onclick="showSection('contact')">Me contacter</a>
+        </div>
+        <div class="nav-socials">
+            <a href="https://www.linkedin.com/in/thomas-herberts-787b8830b/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.instagram.com/oceania.asso/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        </div>
+    </nav>
+
+    <img src="logo-kaviar.png" alt="Logo Kaviar Tech" class="logo-kaviar" onerror="this.style.opacity='0'">
+
+    <section id="accueil" class="active">
+        <h1>Thomas : Objectif Kaviar</h1>
+        <div class="image-container">
+            <img src="presentation.png" alt="Présentation Thomas" class="presentation-img" onerror="this.style.display='none'">
+        </div>
+        <p style="font-size: 1.4rem; opacity: 0.9; max-width: 700px; margin: 0 auto;">Étudiant en Bachelor (English Track) à Rennes SB, prêt à s'investir pour Kaviar Tech.</p>
+        <div><a href="Cv.pdf" target="_blank" class="btn-cv">Consulter mon CV</a></div>
+    </section>
+
+    <section id="pourquoi">
+        <h2>Pourquoi moi ?</h2>
+        <div class="content-card">
+            <p>Passionné par les nouvelles technologies, j’utilise déjà plusieurs outils d’IA régulièrement. C’est un atout que je veux mettre au service de votre marketing pour créer du contenu percutant qui parle vraiment aux clients.</p>
+            <p>Côté commerce, je suis très à l’aise à l’oral et j’aime le contact client. Mon expérience au sein du pôle développement commercial de l'association <strong>Océania</strong> m'a permis de progresser en négociation et relation client.</p>
+            <p>Mon expérience de <strong>président du Bureau de Vie Étudiante</strong> m'a également appris à être avenant, autonome et prêt à m'investir.</p>
+            <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <p style="text-align: center; font-weight: bold; margin-bottom: 15px;">Engagements associatifs :</p>
+                <div class="social-grid">
+                    <a href="https://www.instagram.com/oceania.asso/" target="_blank" class="social-button"><i class="fa-brands fa-instagram"></i> Océania Asso</a>
+                    <a href="https://www.instagram.com/bve_rennessb/" target="_blank" class="social-button"><i class="fa-brands fa-instagram"></i> BVE Rennes SB</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="arai">
+        <img src="arai.png" alt="Logo ARAI" class="section-logo-header" onerror="this.style.opacity='0'">
+        <h2>Stratégie ARAI</h2>
+        <div class="content-card">
+            <div class="strat-block">
+                <span class="axe-titre">Mon réseau proche :</span>
+                Jouer de mes connexions avec l’administration pour présenter ARAI, notamment pour le projet étudiant novateur des <strong>houses</strong> et la <strong>période admissibles</strong> à Rennes SB.
+                <div class="schema">
+                    <div class="schema-box">Statut ex-Président BVE</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+                    <div class="schema-box">Projets Houses / Admissibles</div>
+                </div>
+            </div>
+            <div class="strat-block">
+                <span class="axe-titre">Mon réseau aux États-Unis :</span>
+                Activer mes connexions à l'<strong>Odyssey Charter School</strong> pour humaniser le self-service digital américain via le réseau Alumni.
+            </div>
+            <div class="strat-block">
+                <span class="axe-titre">Les entreprises bretonnes :</span>
+                Cibler les commerces locaux (bars/restaurants) pour un serveur virtuel, puis les entreprises de la <strong>Tech bretonne</strong>.
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="https://arai.kaviar.tech/fr" target="_blank" class="social-button"><i class="fa-solid fa-globe"></i> Site web ARAI</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="poesiar">
+        <img src="poesiar.png" alt="Logo PoesiAR" class="section-logo-header" onerror="this.style.opacity='0'">
+        <h2>Stratégie PoesiAR</h2>
+        <div class="content-card">
+            <div class="strat-block">
+                <span class="axe-titre">Mon réseau proche :</span>
+                Transformer les supports physiques de Rennes SB (affichages, flyers) en expériences immersives via le réseau Alumni et les entrepreneurs locaux.
+            </div>
+            <div class="strat-block">
+                <span class="axe-titre">Mon réseau aux États-Unis :</span>
+                Cibler les franchises du <strong>Christiana Mall</strong>, notamment dans le secteur des sneakers, pour une publicité dynamique.
+            </div>
+            <div class="strat-block">
+                <span class="axe-titre">Commerces Rennais :</span>
+                Développer PoesiAR dans le monde de la nuit (Live Club, Espace Club) et les bars rennais pour des teasers et de la billetterie instantanée.
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="https://poesiar.io/" target="_blank" class="social-button"><i class="fa-solid fa-globe"></i> Site web PoesiAR</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="photos">
+        <h2>Photos & Expériences</h2>
+        <p style="text-align: center; margin-bottom: 30px; opacity: 0.9;">
+            Je tenais également à vous partager diverses photos en rapport avec mes expériences passées afin de mieux visualiser mon parcours et qui je suis.
+        </p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="diplome.jpg" alt="Remise de diplôme USA">
+                <div class="gallery-caption">Moi et mes camarades à ma remise de diplôme aux États-Unis</div>
+            </div>
+            <div class="gallery-item">
+                <img src="mall.jpg" alt="Christiana Mall">
+                <div class="gallery-caption">Le centre commercial Christiana Care</div>
+            </div>
+            <div class="gallery-item">
+                <img src="nyc.jpg" alt="NYC Empire State">
+                <div class="gallery-caption">New York vu de l'Empire State Building en visite</div>
+            </div>
+            <div class="gallery-item">
+                <img src="tifo.jpg" alt="Tifo BVE">
+                <div class="gallery-caption">Tifo réalisé pour le Bureau de Vie Étudiante dans le cadre de nos campagnes d'élection</div>
+            </div>
+            <div class="gallery-item">
+                <video controls>
+                    <source src="gagner.mov" type="video/quicktime">
+                    Votre navigateur ne supporte pas la vidéo.
+                </video>
+                <div class="gallery-caption">Vidéo de notre victoire pendant les résultats d'élection du bureau</div>
+            </div>
+            <div class="gallery-item">
+                <img src="bve.jpg" alt="BVE au complet">
+                <div class="gallery-caption">Notre Bureau de Vie Étudiante de l'année dernière au complet</div>
+            </div>
+            <div class="gallery-item">
+                <img src="oceania.jpg" alt="Océania au complet">
+                <div class="gallery-caption">Notre association Océania actuelle au complet</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Me contacter</h2>
+        <div class="content-card" style="text-align: center;">
+            <p style="font-size: 1.2rem;">📧 <strong>thomas.herberts@rennes-sb.com</strong></p>
+            <p style="font-size: 1.2rem;">📞 <strong>+33 7 62 96 72 07</strong></p>
+            <div class="social-grid">
+                <a href="https://www.linkedin.com/in/thomas-herberts-787b8830b/" target="_blank" class="social-button"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
+            <p style="opacity: 0.7;">Rennes / Brest | 2ème année de Bachelor</p>
+        </div>
+    </section>
+
+    <script>
+        function showSection(id) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            const target = document.getElementById(id);
+            if (target) target.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

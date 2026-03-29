@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thomas Herberts - Objectif Kaviar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #2e026d 0%, #0f0c29 100%);
+            --accent-color: #00d2ff;
+            --text-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.07);
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gradient);
+            background-attachment: fixed;
+            color: var(--text-color);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px 40px;
+            position: sticky;
+            top: 0;
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        nav a:hover { color: var(--accent-color); }
+
+        .nav-socials a {
+            font-size: 1.2rem;
+            margin-left: 15px;
+            color: white;
+            transition: color 0.3s;
+        }
+
+        .nav-socials a:hover { color: var(--accent-color); }
+
+        /* Logo Kaviar (flottant en haut à droite) */
+        .logo-kaviar {
+            position: fixed;
+            top: 100px;
+            right: 40px;
+            width: 130px;
+            filter: drop-shadow(0 0 8px var(--accent-color));
+            z-index: 10;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        section.active {
+            display: flex;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Accueil */
+        #accueil { text-align: center; }
+        h1 { font-size: 3.5rem; margin-bottom: 10px; font-weight: 700; letter-spacing: -1px; }
+
+        .image-container {
+            margin: 20px auto;
+            max-width: 300px; 
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 210, 255, 0.15);
+        }
+
+        .presentation-img { width: 100%; height: auto; display: block; }
+
+        .btn-cv {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 18px 40px;
+            background: var(--accent-color);
+            color: #0f0c29;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-cv:hover { transform: scale(1.05); }
+
+        /* Cartes de contenu */
+        .content-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            margin-bottom: 30px;
+        }
+
+        h2 { font-size: 2.5rem; margin-bottom: 30px; color: var(--accent-color); text-align: center; }
+
+        .strat-block {
+            margin-bottom: 40px;
+            padding-left: 25px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* Style des axes stratégiques : GRAS et BLEU */
+        .axe-titre {
+            display: block;
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        /* Schémas */
+        .schema {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .schema-box {
+            background: rgba(0, 210, 255, 0.1);
+            border: 1px solid var(--accent-color);
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-align: center;
+            min-width: 140px;
+            color: white;
+        }
+
+        .schema-arrow { color: var(--accent-color); font-size: 1.1rem; }
+
+        /* Galerie Photos */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .gallery-item img, .gallery-item video {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-caption {
+            padding: 15px;
+            font-size: 0.95rem;
+            text-align: center;
+            color: #efefef;
+        }
+
+        /* "En savoir plus" et Liens */
+        .more-info-title {
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: white;
+            display: block;
+        }
+
+        .social-grid {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .social-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .social-button:hover {
+            background: var(--accent-color);
+            color: #0f0c29;
+            transform: translateY(-3px);
+        }
+
+        .section-logo-header {
+            display: block;
+            margin: 0 auto 30px auto;
+            max-width: 120px;
+            height: auto;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.3));
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            nav { flex-direction: column; gap: 10px; padding: 10px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .schema { flex-direction: column; }
+            .schema-arrow { transform: rotate(90deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a onclick="showSection('accueil')">Accueil</a>
+            <a onclick="showSection('pourquoi')">Pourquoi moi ?</a>
+            <a onclick="showSection('arai')">Stratégie ARAI</a>
+            <a onclick="showSection('poesiar')">Stratégie PoesiAR</a>
+            <a onclick="showSection('photos')">Photos</a>
+            <a onclick="showSection('contact')">Me contacter</a>
+        </div>
+        <div class="nav-socials">
+            <a href="https://www.linkedin.com/in/thomas-herberts-787b8830b/" target="_blank" style="color:white;"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+    </nav>
+
+    <img src="logo-kaviar.png" alt="Logo Kaviar Tech" class="logo-kaviar" onerror="this.style.opacity='0'">
+
+    <section id="accueil" class="active">
+        <h1>Thomas : Objectif Kaviar</h1>
+        <div class="image-container">
+            <img src="presentation.png" alt="Présentation Thomas" class="presentation-img" onerror="this.style.display='none'">
+        </div>
+        <p style="font-size: 1.4rem; opacity: 0.9; max-width: 700px; margin: 0 auto;">Étudiant en Bachelor (English Track) à Rennes SB, prêt à s'investir pour Kaviar Tech.</p>
+        <div><a href="Cv.pdf" target="_blank" class="btn-cv">Consulter mon CV</a></div>
+    </section>
+
+    <section id="pourquoi">
+        <h2>Pourquoi moi ?</h2>
+        <div class="content-card">
+            <p>Passionné par les nouvelles technologies, j’utilise déjà plusieurs outils d’IA régulièrement (notamment pour m’aider à mettre en forme ce site web). C’est un atout que je veux mettre au service de votre marketing pour créer du contenu percutant (vidéos, posts etc..) qui parle vraiment aux clients.</p>
+            <p>Côté commerce, je suis très à l’aise à l’oral et j’aime le contact client. Mon expérience au sein du pôle développement commercial de l'association Océania m'a permis de progresser en négociation et relation client. Prospecter, qualifier des leads ou faire des démonstrations en salon ne me fait pas peur. Au contraire, c’est pour moi un vrai moteur.</p>
+            <p>Mon expérience de président du Bureau de Vie Étudiante m'a également appris à être avenant, autonome et prêt à m'investisr. C'est pourquoi je pense pouvoir être un vrai atout pour votre entreprise. Ma soif de réussite et de vendre est selon moi une qualité majeure que je saurais mettre à profit.</p>
+            <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <p class="more-info-title">Retrouvez mes engagements associatifs :</p>
+                <div class="social-grid">
+                    <a href="https://www.instagram.com/oceania.asso/" target="_blank" class="social-button"><i class="fa-brands fa-instagram"></i> Oceania Asso</a>
+                    <a href="https://www.instagram.com/bve_rennessb/" target="_blank" class="social-button"><i class="fa-brands fa-instagram"></i> BVE Rennes SB</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="arai">
+        <img src="arai.png" alt="Logo ARAI" class="section-logo-header" onerror="this.style.opacity='0'">
+        <h2>Ma stratégie de développement pour ARAI</h2>
+        <div class="content-card">
+            <p style="text-align: center; margin-bottom: 30px;">J’ai pu m’informer sur ARAI, son fonctionnement et même le tester à travers le site, notre rendez-vous m’a également beaucoup appris sur ce produit et c’est pourquoi j’ai établi les stratégies suivantes pour son développement dans le cadre d’un stage :</p>
+            
+            <div class="strat-block">
+                <span class="axe-titre">- Mon réseau proche :</span>
+                Après analyse et découverte de ARAI, je me suis vite rendu compte qu’il pourrait correspondre aux attentes de mon école et qu’il était intéressant pour moi de jouer de mes connections avec l’administration afin de présenter et vendre le produit. Il serait notamment intéressant pour le développement des houses, un projet étudiant novateur commencé cette année à l’école. Celui-ci est en plein développement et ARAI pourrait venir moderniser encore plus ce projet. Son utilisation serait diverse, pour des réponses aux questions, pour accueillir et guider les nombreux étudiants du campus tous à la fois et bien plus. Mes relations avec l’administration de l’école de par mon ancien statut de président du BVE pourrait me permettre d’entamer rapidement des présentations du produit et des propositions de vente.
+                <br><br>
+                Dans le cadre de mon école, ARAI pourrait également correspondre à la période admissibles durant laquelle j’ai participé l’année dernière, cette période consiste à accueillir sur le campus les candidats pour intégrer l’école l’année suivante. L’utilisation d’ARAI dans un but d’accueil et de donner des directions pourrait donc être intéressant pour l’école. Ayant participé l’année dernière, il sera facile pour moi d’approcher les organisateurs pour en discuter. Ces deux opportunités me mènent à penser qu’il y a possibilité de développer ARAI à Rennes School Of Business et dans les écoles en général, dans Rennes ou à travers la France.
+                
+                <div class="schema">
+                    <div class="schema-box">Président BVE RSB</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Houses / Admissibles</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Ventes Nationales Écoles</div>
+                </div>
+            </div>
+
+            <div class="strat-block">
+                <span class="axe-titre">- Mon réseau aux États-Unis :</span>
+                Mon année passée en immersion aux États-Unis m’a permis de comprendre une chose essentielle : là-bas, l’expérience client est une religion, mais elle manque paradoxalement de visage. Avec ARAI de Kaviar Tech, on tient la solution parfaite pour humaniser le self-service digital. Fort de cette expérience terrain et des connexions que j’y ai tissées, je compte activer mon réseau immédiatement. Mon plan est de solliciter mon ancienne école américaine pour leur présenter le projet ; c'est un point d'entrée stratégique qui me permettra de rebondir sur leur puissant réseau d’Alumni et sur mes connections personnelles. En ciblant les anciens élèves aujourd'hui en poste dans le commerce ou la tech, je pourrai obtenir des introductions directes et crédibles auprès d'entreprises locales pour déployer là où le besoin est le plus fort.
+                
+                <div class="schema">
+                    <div class="schema-box">Immersion Odyssey School</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Réseau Alumni US</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Expansion Marché US</div>
+                </div>
+            </div>
+
+            <div class="strat-block">
+                <span class="axe-titre">- Les entreprises bretonnes :</span>
+                Pour amorcer le déploiement d’ARAI, ma stratégie repose sur une approche de terrain très concrète. Je commencerai par aller au contact direct des commerces locaux, ciblant en priorité des établissements comme des bars ou des restaurants peu bruyants. L'idée est de leur proposer une solution de commande fluide et immersive : via un simple QR code, ARAI devient leur serveur virtuel capable de prendre les commandes directement, supprimant ainsi toute friction au moment du choix. Une fois cette preuve d'efficacité établie, je passerai à l'étape supérieure en sollicitant des entreprises de la Tech bretonne. Je ciblerai les entreprises régionales qui font face à des enjeux de conversion ou de support client saturé. Pour elles, ARAI sera un véritable levier de croissance capable de booster leur engagement client et de moderniser radicalement leur image de marque.
+                
+                <div class="schema">
+                    <div class="schema-box">Pilote Commerces Locaux</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Serveur Virtuel QR Code</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Tech Bretonne & Croissance</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <p class="more-info-title">En savoir plus :</p>
+                <div class="social-grid">
+                    <a href="https://www.rennes-sb.fr/houses/" target="_blank" class="social-button"><i class="fa-solid fa-graduation-cap"></i> Sur les Houses</a>
+                    <a href="http://odysseycharterschooldel.com/" target="_blank" class="social-button"><i class="fa-solid fa-school"></i> Mon école aux USA</a>
+                    <a href="https://arai.kaviar.tech/fr" target="_blank" class="social-button"><i class="fa-solid fa-globe"></i> Site web ARAI</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="poesiar">
+        <img src="poesiar.png" alt="Logo PoesiAR" class="section-logo-header" onerror="this.style.opacity='0'">
+        <h2>Ma stratégie de développement pour PoesiAR</h2>
+        <div class="content-card">
+            <p style="text-align: center; margin-bottom: 25px;">J’ai eu l’occasion durant mon rendez-vous de voir PoesiAR en action de mes propres yeux, ce qui m’a conforté dans l’idée que c’est un outil au potentiel infini. La démonstration à laquelle j’ai assistée m’a déjà donné des idées et pistes pour créer une stratégie :</p>
+            
+            <div class="strat-block">
+                <span class="axe-titre">- Mon réseau proche :</span>
+                Ma stratégie de développement pour PoesiAR repose sur l'activation de mon réseau au sein de mon école Rennes School of Business, en ciblant d'abord l'administration de l'école en charge des évènements et de la communication. Grâce à mes connexions directes, je compte leur proposer de transformer leurs supports physiques comme les affiches de portes ouvertes, flyers ou encore les affichages urbains en véritables expériences vivantes et immersives. Ceci se ferait à travers des démonstrations et des réunions d’explication. En parallèle, je mobiliserai le réseau des Alumni de RSB pour introduire PoesiAR auprès de diplômés aujourd'hui entrepreneurs, notamment un ancien élève ayant lancé sa propre marque de boisson ; l'objectif est de démontrer comment PoesiAR peut métamorphoser un packaging classique en un canal de contenu vidéo dynamique.
+                
+                <div class="schema">
+                    <div class="schema-box">Administration & Com RSB</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Affichage & Packagings</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Marketing Expérientiel</div>
+                </div>
+            </div>
+
+            <div class="strat-block">
+                <span class="axe-titre">- Mon réseau aux États-Unis :</span>
+                Ma stratégie sur PoesiAR pour les États-Unis se base en premier lieu sur les commerces locaux que j’avais l’habitude de fréquenter, notamment le centre commercial Christiana Care. Les États-Unis sont connus pour être très ancrés sur le spectacle et la publicité, c’est pourquoi mon objectif est de contacter les différentes franchises de magasins du centre commercial et leur montrer le produit en organisant des meetings vidéo. En réussissant à convaincre un premier commerce, les autres suivront car ils ne voudront pas être en retard. Je pense notamment en premier à un magasin de Sneakers assez ancré sur la pub dans ce centre commercial.
+                
+                <div class="schema">
+                    <div class="schema-box">Christiana Care Mall</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Retailers & Sneaker Shops</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Publicité High-Tech US</div>
+                </div>
+            </div>
+
+            <div class="strat-block">
+                <span class="axe-titre">- Commerces Rennais :</span>
+                Pour les entreprises rennaises, mon focus va d’abord se faire dans le monde de la nuit où j’ai des contacts grâce à mon rôle de président du BVE. Je pense notamment au live club ou à l’espace club, deux établissements qui ne cessent de se renouveler dans leurs affiches. Mon but est de leur présenter PoesiAR pour donner davantage envie aux jeunes de venir à leurs évènements (vidéos au scan de l'affiche, teaser, offre spéciale ou achat de place direct via QR code). Ensuite, j’essaierai de développer PoesiAR au niveau des bars rennais qui ont l’habitude de proposer divers évènements.
+                
+                <div class="schema">
+                    <div class="schema-box">Monde de la Nuit (BVE)</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Affiches Urbaines Teasers</div>
+                    <div class="schema-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                    <div class="schema-box">Conversion Billetterie</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <p class="more-info-title">En savoir plus :</p>
+                <div class="social-grid">
+                    <a href="https://poesiar.io/" target="_blank" class="social-button"><i class="fa-solid fa-globe"></i> Site web PoesiAR</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="photos">
+        <h2>Photos & Expériences</h2>
+        <p style="text-align: center; margin-bottom: 30px; opacity: 0.9;">Je tenais également à vous partager diverses photos en rapport avec mes expériences passées afin de mieux visualiser mon parcours et qui je suis.</p>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="diplome.jpg" alt="Diplôme USA">
+                <div class="gallery-caption">Moi et mes camarades à ma remise de diplôme aux États-Unis</div>
+            </div>
+            <div class="gallery-item">
+                <img src="mall.jpg" alt="Mall">
+                <div class="gallery-caption">Le centre commercial Christiana Care</div>
+            </div>
+            <div class="gallery-item">
+                <img src="nyc.jpg" alt="NYC">
+                <div class="gallery-caption">New York vu de l'Empire State Building en visite</div>
+            </div>
+            <div class="gallery-item">
+                <img src="tifo.jpg" alt="Tifo">
+                <div class="gallery-caption">Tifo réalisé pour le Bureau de Vie Étudiante dans le cadre de nos campagnes</div>
+            </div>
+            <div class="gallery-item">
+                <video controls width="100%" poster="presentation.png">
+                    <source src="gagner.mp4" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de la vidéo.
+                </video>
+                <div class="gallery-caption">Vidéo de notre victoire d'élection du bureau</div>
+            </div>
+            <div class="gallery-item">
+                <img src="bve.jpg" alt="BVE Team">
+                <div class="gallery-caption">Notre Bureau de Vie Étudiante de l'année dernière au complet</div>
+            </div>
+            <div class="gallery-item">
+                <img src="oceania.jpg" alt="Oceania Asso">
+                <div class="gallery-caption">Notre association Océania actuelle au complet</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Me contacter</h2>
+        <div class="content-card" style="text-align: center;">
+            <p style="font-size: 1.2rem;">📧 <strong>thomas.herberts@rennes-sb.com</strong></p>
+            <p style="font-size: 1.2rem;">📞 <strong>+33 7 62 96 72 07</strong></p>
+            <div class="social-grid">
+                <a href="https://www.linkedin.com/in/thomas-herberts-787b8830b/" target="_blank" class="social-button"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 40px 0;">
+            <p style="opacity: 0.7;">Rennes / Brest | 2ème année de Bachelor (English Track)</p>
+        </div>
+    </section>
+
+    <script>
+        function showSection(id) {
+            // Cacher toutes les sections
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            // Afficher la section cible
+            const target = document.getElementById(id);
+            if (target) {
+                target.classList.add('active');
+            }
+            // Remonter en haut de page
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
